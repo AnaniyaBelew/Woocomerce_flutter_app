@@ -78,12 +78,12 @@ Map<String, dynamic> environment = {
     "ShowAllCoupons": true,
     "ShowExpiredCoupons": true,
     "AlwaysShowTabBar": false,
-    "PrivacyPoliciesPageUrlOrId": "https://negade.biz/privacy-policy/",
-    "AboutUSPageUrl": "https://negade.biz/about-us/",
-    "NewsPageUrl": "https://negade.biz/about-us/",
-    "FAQPageUrl": "https://negade.biz/about-us/",
-    "SupportPageUrl": "https://negade.biz/about-us/",
-    "DownloadPageUrl": "https://negade.biz/about-us/",
+    "PrivacyPoliciesPageUrlOrId": "https://inspireui.com/privacy/",
+    "AboutUSPageUrl": "https://codecanyon.net/user/inspireui",
+    "NewsPageUrl": "https://products.inspireui.com/",
+    "FAQPageUrl": "https://products.inspireui.com/have-a-question/",
+    "SupportPageUrl": "https://support.inspireui.com/",
+    "DownloadPageUrl": "https://fluxstore.app/",
     "SocialConnectUrl": [
       {
         "url": "https://www.youtube.com/inspireui?sub_confirmation=1",
@@ -207,7 +207,7 @@ Map<String, dynamic> environment = {
       },
       {
         "desc":
-        "See all things happening around you just by a click in your phone. Fast, convenient and clean.",
+            "See all things happening around you just by a click in your phone. Fast, convenient and clean.",
         "image": "assets/images/fogg-uploading-1.png",
         "title": "Connect Surrounding World"
       },
@@ -748,10 +748,10 @@ Map<String, dynamic> environment = {
   },
   "paypalConfig": {
     "secret":
-    "ECbFREri7NFj64FI_9WzS6A0Az2DqNLrVokBo0ZBu4enHZKMKOvX45v9Y1NBPKFr6QJv2KaSp5vk5A1G",
+        "ECbFREri7NFj64FI_9WzS6A0Az2DqNLrVokBo0ZBu4enHZKMKOvX45v9Y1NBPKFr6QJv2KaSp5vk5A1G",
     "enabled": true,
     "clientId":
-    "ASlpjFreiGp3gggRKo6YzXMyGM6-NwndBAQ707k6z3-WkSSMTPDfEFmNmky6dBX00lik8wKdToWiJj5w",
+        "ASlpjFreiGp3gggRKo6YzXMyGM6-NwndBAQ707k6z3-WkSSMTPDfEFmNmky6dBX00lik8wKdToWiJj5w",
     "returnUrl": "com.inspireui.fluxstore://paypalpay",
     "nativeMode": false,
     "production": false,
@@ -767,7 +767,7 @@ Map<String, dynamic> environment = {
     "enabled": true,
     "production": false,
     "accessToken":
-    "TEST-5726912977510261-102413-65873095dc5b0a877969b7f6ffcceee4-613803978",
+        "TEST-5726912977510261-102413-65873095dc5b0a877969b7f6ffcceee4-613803978",
     "paymentMethodId": "woo-mercado-pago-basic"
   },
   "payTmConfig": {
@@ -936,7 +936,7 @@ Map<String, dynamic> environment = {
       "app": "https://t.me/Anewb",
       "iconData": "whatsapp",
       "imageData":
-      "https://trello.com/1/cards/668545c01a71a337e3698523/attachments/66c81c70a60d98a72056ff4d/download/telegram.png",
+          "https://trello.com/1/cards/668545c01a71a337e3698523/attachments/66c81c70a60d98a72056ff4d/download/telegram.png",
       "description": "Telegram"
     },
     {"app": "tel::251983832880", "iconData": "phone", "description": "Call Us"},
@@ -963,7 +963,7 @@ Map<String, dynamic> environment = {
   "splashScreen": {
     "type": "flare",
     "image":
-    "https://trello.com/1/cards/668545c01a71a337e3698523/attachments/66c81a2bbf8187790eed14dd/download/Logo_White.svg",
+        "https://trello.com/1/cards/668545c01a71a337e3698523/attachments/66c81a2bbf8187790eed14dd/download/Logo_White.svg",
     "boxFit": "contain",
     "enable": false,
     "duration": 2000,
@@ -980,7 +980,7 @@ Map<String, dynamic> environment = {
   "darkConfig": {"MainColor": "ff000000", "saleColor": "#E15241"},
   "lightConfig": {
     "logo":
-    "https://trello.com/1/cards/66857dd3de4633861945d497/attachments/66b718dc73cd636e1826cc06/download/White_Logo%404x.png",
+        "https://trello.com/1/cards/66857dd3de4633861945d497/attachments/66b718dc73cd636e1826cc06/download/White_Logo%404x.png",
     "MainColor": "ff5b8b00",
     "saleColor": "ff5b8b00"
   },

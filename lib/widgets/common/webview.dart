@@ -24,7 +24,6 @@ import '../html/index.dart';
 import 'webview_inapp.dart';
 
 mixin WebviewMixin {
-  /// Return true when overridden and the navigation in webview should stop.
   Future<bool> overrideWebNavigation(String url,{BuildContext? cont}) async {
     /// open the normal web link
 
@@ -32,7 +31,8 @@ mixin WebviewMixin {
       'https://negade.biz/checkout/',
       'https://negade.biz/checkout/order-detail',
       'https://negade.biz/privacy-policy/',
-      'https://negade.biz/about-us/'
+      'https://negade.biz/about-us/',
+      'https://checkout.arifpay.net'
     ];
     if (allowedUrls.any((allowedUrl) => url.startsWith(allowedUrl))) {
       return false; // Allow navigation
