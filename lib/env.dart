@@ -52,7 +52,7 @@ Map<String, dynamic> environment = {
     "EnableSkuSearch": true,
     "showStockStatus": true,
     "GridCount": 3,
-    "isCaching": false,
+    "isCaching": true,
     "kIsResizeImage": true,
     "httpCache": true,
     "Currencies": [
