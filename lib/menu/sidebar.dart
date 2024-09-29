@@ -164,9 +164,7 @@ class MenuBarState extends State<SideBarMenu> {
               style: textStyle,
             ),
             onTap: () => pushNavigator(
-              name: !Provider.of<AppModel>(context, listen: false).isMultivendor
-                  ? RouteList.category
-                  : RouteList.vendorCategory,
+              name:RouteList.category,
             ),
           );
         }
