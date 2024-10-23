@@ -9,6 +9,7 @@ import '../../../../common/constants.dart';
 import '../../../../common/events.dart';
 import '../../../../common/tools/flash.dart';
 import '../../../../common/tools/navigate_tools.dart';
+import '../../../../data/boxes.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../models/index.dart';
 import '../../../../modules/sms_login/sms_login.dart';
@@ -100,8 +101,10 @@ mixin LoginMixin<T extends StatefulWidget> on BaseScreen<T> {
   Future<void> runLogin(context) async {
     if (usernameCtrl.text.isEmpty || passwordCtrl.text.isEmpty) {
       unawaited(
-        FlashHelper.errorMessage(context,
-            message: S.of(context).pleaseInputFillAllFields),
+        FlashHelper.errorMessage(
+          context,
+          message: S.of(context).pleaseInputFillAllFields,
+        ),
       );
     } else {
       await beforeCallLogin();
@@ -109,17 +112,19 @@ mixin LoginMixin<T extends StatefulWidget> on BaseScreen<T> {
         username: usernameCtrl.text.trim(),
         password: passwordCtrl.text.trim(),
         success: (user) {
-          if(user.role=='customer') {
-            afterCallLogin(true);
-            loginDone();
-          }
-          if(user.role=='new'){
+          if (user.role.toString() == 'new') {
+            UserBox().cleanUpForLogout();
+            Provider.of<UserModel>(context, listen: false).logout();
             afterCallLogin(false);
-            _failMessage('Account is Not Approved  ');
-          }
-          else{
+            _failMessage('Account is Not Approved');
+          } else if (user.role.toString() != 'customer') {
+            UserBox().cleanUpForLogout();
+            Provider.of<UserModel>(context, listen: false).logout();
             afterCallLogin(false);
             _failMessage('This app is for Customers Only!');
+          } else {
+            afterCallLogin(true);
+            loginDone();
           }
         },
         fail: (message) {
@@ -129,6 +134,7 @@ mixin LoginMixin<T extends StatefulWidget> on BaseScreen<T> {
       );
     }
   }
+
 
   void launchForgetPasswordURL(String? url) async {
     if (url != null && url != '') {

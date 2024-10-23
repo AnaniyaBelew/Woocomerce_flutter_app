@@ -68,8 +68,7 @@ mixin SettingActionMixin {
   }
 
   void openAboutUS(BuildContext context, {GeneralSettingItem? about}) {
-    final aboutUrl = about?.webUrl ?? SettingConstants.aboutUsUrl;
-
+    final aboutUrl = "https://negade.biz/about-us/";
     if (kIsWeb || UniversalPlatform.isMacOS || UniversalPlatform.isWindows) {
       Tools.launchURL(aboutUrl);
       return;

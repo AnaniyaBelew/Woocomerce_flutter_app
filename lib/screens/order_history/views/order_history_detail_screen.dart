@@ -350,9 +350,29 @@ class _OrderHistoryDetailScreenState
 
               /// Render the Cancel and Refund
               if (kPaymentConfig.enableRefundCancel && allowCancelAndRefund)
-                Services()
-                    .widget
-                    .renderButtons(context, order, cancelOrder, refundOrder),
+                ElevatedButton(
+                  onPressed: () {
+                    cancelOrder();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white, backgroundColor: Colors.red, // White text
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8), // Rounded corners
+                    ),
+                  ),
+                  child: const Text(
+                    'Cancel Order', // Button text
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+
+              // Services()
+                //     .widget
+                //     .renderButtons(context, order, cancelOrder, null),
 
               const SizedBox(height: 20),
               if (isPending && kPaymentConfig.showTransactionDetails) ...[

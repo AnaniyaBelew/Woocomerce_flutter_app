@@ -20,6 +20,9 @@ export 'product_item.dart';
 
 enum OrderStatus {
   pending,
+  approved,
+  paid,
+  confirmed,
   processing,
   cancelled,
   refunded,

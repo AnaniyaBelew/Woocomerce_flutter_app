@@ -31,7 +31,9 @@ class SettingUserInfoWidget extends StatefulWidget {
 }
 
 class _SettingUserInfoWidgetState extends State<SettingUserInfoWidget> {
+
   void _handleUpdateProfile() async {
+
     final hasChangePassword = await FluxNavigate.pushNamed(
       RouteList.updateUser,
     ) as bool?;

@@ -1,11 +1,15 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:inspireui/icons/icon_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/constants.dart';
 import '../../../common/tools/navigate_tools.dart';
+import '../../../data/boxes.dart';
 import '../../../generated/l10n.dart';
 import '../../../models/app_model.dart';
+import '../../../models/user_model.dart';
 import '../../../widgets/common/flux_image.dart';
 import '../../common/app_bar_mixin.dart';
 
@@ -27,74 +31,109 @@ class AppBarSettingWidget extends StatefulWidget {
   State<AppBarSettingWidget> createState() => _AppBarSettingWidgetState();
 }
 
-class _AppBarSettingWidgetState extends State<AppBarSettingWidget>
-    with AppBarMixin {
+class _AppBarSettingWidgetState extends State<AppBarSettingWidget> with AppBarMixin {
+  String? customId;
+  String? errorMessage;
+  bool isLoading = true; // Track loading state
+  bool hasInitialized = false; // Flag to ensure fetchCustomCode is only called once
+
   bool get _canPop => ModalRoute.of(context)?.canPop ?? false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!hasInitialized) {
+      var user = Provider.of<UserModel>(context, listen: false).user;
+      if (user != null) {
+        fetchCustomCode(user.id!);
+      }
+      hasInitialized = true; // Prevent multiple calls
+    }
+  }
+
+  Future<void> fetchCustomCode(String userId) async {
+    final String url = 'https://negade.biz/wp-json/myplugin/v1/custom-code/$userId';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        setState(() {
+          customId = data['custom_code'].toString();
+          errorMessage = null; // Clear any previous error
+        });
+      } else {
+        setState(() {
+          errorMessage = 'Error: ${response.statusCode} - ${response.reasonPhrase}';
+          customId = null; // Clear any previous code
+        });
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = 'An unexpected error occurred: $e';
+        customId = null; // Clear any previous code
+      });
+    } finally {
+      // Ensure loading state is updated after the request completes
+      setState(() {
+        isLoading = false; // Set loading to false regardless of success or failure
+      });
+    }
+  }
 
   Widget _renderDrawerIcon({Color color = Colors.white70}) {
     var icon = Icons.blur_on;
     if (widget.drawerIcon != null) {
-      icon = iconPicker(
-              widget.drawerIcon!['icon'], widget.drawerIcon!['fontFamily']) ??
-          Icons.blur_on;
+      icon = iconPicker(widget.drawerIcon!['icon'], widget.drawerIcon!['fontFamily']) ?? Icons.blur_on;
     }
-    return Icon(
-      icon,
-      color: color,
-    );
+    return Icon(icon, color: color);
   }
 
   Widget _renderPopButton({Color? color}) {
     var popButton = GestureDetector(
       onTap: () => Navigator.pop(context),
-      child: Icon(
-        Icons.close,
-        color: color ?? Colors.white,
-      ),
+      child: Icon(Icons.close, color: color ?? Colors.white),
     );
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: popButton,
-    );
+    return Padding(padding: const EdgeInsets.symmetric(horizontal: 10), child: popButton);
   }
 
   List<Widget>? _renderActions() {
     return _canPop
-        ? [
-            _renderPopButton(
-                color: widget.showBackground
-                    ? Colors.white
-                    : Theme.of(context).iconTheme.color!)
-          ]
+        ? [_renderPopButton(color: widget.showBackground ? Colors.white : Theme.of(context).iconTheme.color!)]
         : null;
   }
 
   @override
   Widget build(BuildContext context) {
-    var background = widget.showBackground
-        ? (widget.background ?? kProfileBackground)
-        : null;
+    var background = widget.showBackground ? (widget.background ?? kProfileBackground) : null;
 
     if (showAppBar(RouteList.profile)) {
       return getSliverAppBarWidget(
         appBar: appBar,
-        popButton: _renderPopButton(
-          color: Theme.of(context).colorScheme.secondary,
-        ),
+        popButton: _renderPopButton(color: Theme.of(context).colorScheme.secondary),
       );
     }
 
-    final leadingWidget =
-        (context.read<AppModel>().appConfig?.drawer?.enable ?? true) && !_canPop
-            ? IconButton(
-                icon: _renderDrawerIcon(
-                  color: widget.showBackground
-                      ? Colors.white70
-                      : Theme.of(context).iconTheme.color!,
-                ),
-                onPressed: () => NavigateTools.onTapOpenDrawerMenu(context),
-              )
-            : const SizedBox();
+    final leadingWidget = (context.read<AppModel>().appConfig?.drawer?.enable ?? true) && !_canPop
+        ? IconButton(
+      icon: _renderDrawerIcon(color: widget.showBackground ? Colors.white70 : Theme.of(context).iconTheme.color!),
+      onPressed: () => NavigateTools.onTapOpenDrawerMenu(context),
+    )
+        : const SizedBox();
+
+    // Show CircularProgressIndicator when loading
+    if (customId==null) {
+      return SliverAppBar(
+        title: const Text('Loading...'),
+        centerTitle: true,
+        floating: true,
+        pinned: true,
+        leading: leadingWidget,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        actions: _renderActions(),
+      );
+    }
 
     if (background != null) {
       return SliverAppBar(
@@ -107,7 +146,7 @@ class _AppBarSettingWidgetState extends State<AppBarSettingWidget>
           centerTitle: true,
           titlePadding: const EdgeInsets.only(bottom: 16),
           title: Text(
-            S.of(context).settings,
+            UserBox().isLoggedIn ? (customId != null ? 'Merchant Id: $customId' : S.of(context).settings) : S.of(context).settings,
             style: const TextStyle(
               fontSize: 18,
               color: Colors.white,
@@ -124,7 +163,9 @@ class _AppBarSettingWidgetState extends State<AppBarSettingWidget>
     }
 
     return SliverAppBar(
-      title: Text(S.of(context).settings),
+      title: UserBox().isLoggedIn
+          ? Text(customId == null ? S.of(context).settings : 'Merchant Id: $customId')
+          : Text(S.of(context).settings),
       centerTitle: true,
       floating: true,
       pinned: true,

@@ -98,25 +98,33 @@ class SettingItemUserInfoWidget extends StatelessWidget {
             )
           : const Icon(Icons.face),
       title: Text(
-        user.name ?? '',
+        '${user.firstName!} ${user.lastName!}' ?? '',
         style: const TextStyle(fontSize: 16),
       ),
       contentPadding: const EdgeInsets.symmetric(
         horizontal: 8.0,
       ),
       horizontalTitleGap: 24.0,
-      subtitle: (user.identifierInformation.isNotEmpty)
-          ? Text(
-              user.identifierInformation,
-              style: TextStyle(
-                  fontSize: 16, color: Theme.of(context).colorScheme.secondary),
-            )
-          : null,
-      onTap: onTapUpdateProfile,
+
+      onTap:onTapUpdateProfile,
       trailing: IconButton(
-        onPressed: onTapUpdateProfile,
-        icon: const Icon(Icons.edit),
+      onPressed:onTapUpdateProfile,
+      icon: const Icon(Icons.edit),
       ),
     );
   }
 }
+
+// trailing: IconButton(
+// onPressed: onTapUpdateProfile,
+// icon: const Icon(Icons.edit),
+// ),
+
+
+// subtitle: (user.identifierInformation.isNotEmpty)
+// ? Text(
+// user.identifierInformation,
+// style: TextStyle(
+// fontSize: 16, color: Theme.of(context).colorScheme.secondary),
+// )
+// : null,

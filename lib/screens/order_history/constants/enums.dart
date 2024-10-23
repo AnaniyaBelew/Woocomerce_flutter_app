@@ -5,12 +5,13 @@ import '../../../generated/l10n.dart';
 enum MyOrderStatus {
   any('any'),
   pending('pending'),
+  delivered('delivered'),
   processing('processing'),
   onHold('on-hold'),
   completed('completed'),
   cancelled('cancelled'),
-  refunded('refunded'),
   failed('failed'),
+
   ;
 
   const MyOrderStatus(this.status);
@@ -20,6 +21,8 @@ enum MyOrderStatus {
     switch (this) {
       case pending:
         return S.of(context).orderStatusPending;
+      case delivered:
+        return 'Delivered';
       case processing:
         return S.of(context).orderStatusProcessing;
       case onHold:
@@ -28,8 +31,8 @@ enum MyOrderStatus {
         return S.of(context).orderStatusCompleted;
       case cancelled:
         return S.of(context).orderStatusCancelled;
-      case refunded:
-        return S.of(context).orderStatusRefunded;
+      // case refunded:
+      //   return S.of(context).orderStatusRefunded;
       case failed:
         return S.of(context).orderStatusFailed;
       default:

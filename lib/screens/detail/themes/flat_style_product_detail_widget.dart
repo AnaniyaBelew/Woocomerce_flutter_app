@@ -126,7 +126,7 @@ class _FlatStyleDetailProductWidgetState
   Product get productData => widget.product;
 
   @override
-  bool get enableVendorChat => stateUI.enableVendorChat;
+  bool get enableVendorChat => false;
 
   bool get enableAutoHideButtonBuy =>
       product.isVariableProduct ||
@@ -245,9 +245,9 @@ class _FlatStyleDetailProductWidgetState
                           ),
                           child: Column(
                             children: [
-                              Services()
-                                  .widget
-                                  .renderVendorInfo(widget.product),
+                              // Services()
+                              //     .widget
+                              //     .renderVendorInfo(widget.product),
                               Services().renderTiredPriceTable(widget.product),
                               Services()
                                   .renderCustomInformationTable(widget.product),

@@ -91,8 +91,7 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
     final screenSize = MediaQuery.sizeOf(context);
 
     final themeConfig = appModel.themeConfig;
-    final forgetPasswordUrl =
-        appModel.appConfig?.forgetPassword ?? ServerConfig().forgetPassword;
+    const forgetPasswordUrl ='https://negade.biz/my-account/lost-password/';
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
@@ -158,7 +157,7 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
                                       labelText: 'Phone Number',
                                       hintText: S
                                           .of(_parentContext)
-                                          .enterYourEmailOrUsername,
+                                          .enterYourPhoneNumber,
                                     ),
                                   ),
                                   CustomTextField(
@@ -192,9 +191,8 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
                                           padding: const EdgeInsets.all(12.0),
                                           child: Text(
                                             S.of(context).resetPassword,
-                                            style: TextStyle(
-                                              color: Theme.of(context)
-                                                  .primaryColor,
+                                            style: const TextStyle(
+                                              color: Colors.green,
                                               decoration:
                                                   TextDecoration.underline,
                                             ),
@@ -273,10 +271,9 @@ class _LoginPageState extends BaseScreen<LoginScreenMobile>
                                             },
                                             child: Text(
                                               ' ${S.of(context).signup}',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                color: Theme.of(context)
-                                                    .primaryColor,
+                                                color: Colors.green,
                                               ),
                                             ),
                                           ),

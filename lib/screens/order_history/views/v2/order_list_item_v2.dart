@@ -243,13 +243,13 @@ class OrderListItemNew extends StatelessWidget with ReOderMixin {
                                     ),
                           ),
                           const SizedBox(height: 4),
-                          // Display empty box if Order Address is null
-                          order.billing != null
-                              ? Text(
-                                  '${S.of(context).shipping}: ${order.billing?.firstName} | ${order.billing?.city}, ${order.billing?.country}',
-                                  style: subtitleStyle,
-                                )
-                              : const SizedBox(),
+                          // // Display empty box if Order Address is null
+                          // order.billing != null
+                          //     ? Text(
+                          //         '${S.of(context).shipping}: ${order.billing?.firstName} | ${order.billing?.city}, ${order.billing?.country}',
+                          //         style: subtitleStyle,
+                          //       )
+                          //     : const SizedBox(),
                           const SizedBox(height: 4),
                           Text.rich(
                             TextSpan(

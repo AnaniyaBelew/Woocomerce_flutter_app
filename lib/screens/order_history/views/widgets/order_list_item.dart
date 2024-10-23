@@ -189,49 +189,48 @@ class OrderListItem extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 5),
                                 // Display empty box if Order Address is null
-                                order.billing != null
-                                    ? Text(
-                                        '${order.billing?.firstName} | ${order.billing?.city}, ${order.billing?.country}',
-                                        style: const TextStyle(fontSize: 14.0),
-                                      )
-                                    : const SizedBox(),
+                                // order.billing != null
+                                //     ? Text(
+                                //         '${order.billing?.firstName} | ${order.billing?.city}, ${order.billing?.country}',
+                                //         style: const TextStyle(fontSize: 14.0),
+                                //       )
+                                //     : const SizedBox(),
                                 const Expanded(
                                   child: SizedBox(height: 1),
                                 ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        S.of(context).createdOn +
-                                            DateFormat('d MMM, HH:mm')
-                                                .format(order.createdAt!),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall!
-                                            .copyWith(
-                                              fontSize: 12.0,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary
-                                                  .withOpacity(0.8),
-                                            ),
-                                      ),
-                                    ),
-                                    Text(
-                                      '${S.of(context).orderNo}: ${order.number}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall!
-                                          .copyWith(
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,  // Aligns text to the left
+                                      children: [
+                                        Text(
+                                          S.of(context).createdOn +
+                                              DateFormat('d MMM, HH:mm').format(order.createdAt!),
+                                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
                                             fontSize: 12.0,
                                             color: Theme.of(context)
                                                 .colorScheme
                                                 .secondary
                                                 .withOpacity(0.8),
                                           ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          '${S.of(context).orderNo}: ${order.number}',
+                                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                            fontSize: 12.0,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary
+                                                .withOpacity(0.8),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
+                              ),
                                 const SizedBox(height: 5),
                               ],
                             ),

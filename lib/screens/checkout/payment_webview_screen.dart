@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../common/config.dart';
+import '../../models/cart/cart_base.dart';
 import '../../services/index.dart';
 import '../../widgets/common/webview.dart';
 import '../base_screen.dart';
@@ -22,7 +24,14 @@ class PaymentWebview extends StatefulWidget {
 class PaymentWebviewState extends BaseScreen<PaymentWebview> {
   int selectedIndex = 1;
   String? orderId;
-
+  late CartModel cartModel;
+  @override
+  void initState() {
+    super.initState();
+    // Clear the cart when the payment web view is initiated.
+    cartModel = Provider.of<CartModel>(context, listen: false);
+    cartModel.clearCart();
+  }
   void handleUrlChanged(String url) {
     if (url.contains('/order-received/')) {
       var uri = Uri.parse(url);

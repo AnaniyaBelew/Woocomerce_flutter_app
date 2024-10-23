@@ -52,7 +52,7 @@ Map<String, dynamic> environment = {
     "EnableSkuSearch": true,
     "showStockStatus": true,
     "GridCount": 3,
-    "isCaching": true,
+    "isCaching": false,
     "kIsResizeImage": true,
     "httpCache": true,
     "Currencies": [
@@ -225,14 +225,14 @@ Map<String, dynamic> environment = {
   },
   "vendorOnBoardingData": [
     {
-      "title": "Welcome aboard",
+      "desc": "Just a few more steps to become our vendor",
       "image": "assets/images/searching.png",
-      "desc": "Just a few more steps to become our vendor"
+      "title": "Welcome aboard"
     },
     {
-      "title": "Let's Get Started",
+      "desc": "Good Luck for great beginnings.",
       "image": "assets/images/manage.png",
-      "desc": "Good Luck for great beginnings."
+      "title": "Let's Get Started"
     }
   ],
   "adConfig": {
@@ -298,8 +298,8 @@ Map<String, dynamic> environment = {
     "androidAppMinimumVersion": 1
   },
   "dynamicLinkConfig": {
-    "enable": true,
     "type": "branchIO",
+    "enable": true,
     "branchIO": {"liveMode": false}
   },
   "languagesInfo": [
@@ -977,7 +977,16 @@ Map<String, dynamic> environment = {
   "orderConfig": {"version": 1},
   "adminName": "InspireUI",
   "adminEmail": "admininspireui@gmail.com",
-  "darkConfig": {"MainColor": "ff000000", "saleColor": "#E15241"},
+  "darkConfig": {
+    "logo":
+        "https://trello.com/1/cards/6702257b549d729877c17c00/attachments/67077defd65bca696477970f/download/Green_Logo%404x.png",
+    "MainColor": "ff000000",
+    "saleColor": "#E15241",
+    "textColor": "ffffffff",
+    "secondaryColor": "ffffffff",
+    "backgroundColor": "ff293f00",
+    "primaryColorLight": "ff5b8b00"
+  },
   "lightConfig": {
     "logo":
         "https://trello.com/1/cards/66857dd3de4633861945d497/attachments/66b718dc73cd636e1826cc06/download/White_Logo%404x.png",

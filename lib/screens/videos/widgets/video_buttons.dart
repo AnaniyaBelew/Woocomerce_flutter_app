@@ -48,18 +48,18 @@ class VideoButtons extends StatelessWidget with ActionButtonMixin {
                 onTap: () => _buyNow(context, enableBottomSheet)),
             const SizedBox(height: 15),
           ],
-          if (firebaseDynamicLinkConfig['isEnabled']) ...[
-            VideoButton(
-              icon: const Icon(
-                Icons.share_sharp,
-                size: kIconSize,
-                color: Colors.white,
-              ),
-              label: S.of(context).share,
-              onTap: () => _share(context),
-            ),
-            const SizedBox(height: 15),
-          ],
+          // if (firebaseDynamicLinkConfig['isEnabled']) ...[
+          //   VideoButton(
+          //     icon: const Icon(
+          //       Icons.share_sharp,
+          //       size: kIconSize,
+          //       color: Colors.white,
+          //     ),
+          //     label: S.of(context).share,
+          //     onTap: () => _share(context),
+          //   ),
+          //   const SizedBox(height: 15),
+          // ],
           VideoButton(
             icon: const Icon(
               CupertinoIcons.info,

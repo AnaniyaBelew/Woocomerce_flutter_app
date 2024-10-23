@@ -233,6 +233,7 @@ mixin CheckoutMixin<T extends StatefulWidget> on State<T>, RazorDelegate {
                                     : 'Booking error!');
                           }
                         }
+                        cartModel.clearCart();
                         onFinish!(order);
                       }
                       onLoading?.call(false);

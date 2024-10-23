@@ -119,14 +119,14 @@ class _ProductFlatViewState extends State<ProductFlatView> with ProductsMixin {
         'title': S.of(context).myWishList,
         'icon': CupertinoIcons.heart,
       },
-      if (firebaseDynamicLinkConfig['isEnabled'] &&
-          (ServerConfig().isWooType || ServerConfig().isShopify) &&
-          !ServerConfig().isListingType)
-        {
-          'type': MenuType.share.name,
-          'title': S.of(context).share,
-          'icon': CupertinoIcons.share,
-        },
+      // if (firebaseDynamicLinkConfig['isEnabled'] &&
+      //     (ServerConfig().isWooType || ServerConfig().isShopify) &&
+      //     !ServerConfig().isListingType)
+      //   {
+      //     'type': MenuType.share.name,
+      //     'title': S.of(context).share,
+      //     'icon': CupertinoIcons.share,
+      //   },
       if (!loggedIn)
         {
           'type': MenuType.login.name,

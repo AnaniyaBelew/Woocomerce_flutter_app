@@ -62,7 +62,6 @@ mixin MyCartMixin<T extends StatefulWidget> on State<T> {
     var message;
 
     if (isLoading) return;
-
     if (kCartDetail['minAllowTotalCartValue'] != null) {
       if (kCartDetail['minAllowTotalCartValue'].toString().isNotEmpty) {
         var totalValue = model.getSubTotal() ?? 0;
@@ -145,6 +144,7 @@ mixin MyCartMixin<T extends StatefulWidget> on State<T> {
             Navigator.of(context).pop();
           }
         }
+        cartModel.clearCart();
       },
       error: (message) async {
         if (message ==

@@ -17,6 +17,7 @@ import '../models/index.dart';
 import '../modules/analytics/analytics.dart';
 import '../modules/dynamic_layout/index.dart';
 import '../modules/dynamic_layout/product/product_list.dart';
+import '../screens/CustomUpdate/customeUserUpdate.dart';
 import '../screens/categories/layouts/fancy_scroll.dart';
 import '../screens/categories/layouts/multi_level.dart';
 import '../screens/categories/layouts/parallax.dart';
@@ -1201,7 +1202,7 @@ abstract class BaseFrameworks {
     return const SizedBox();
   }
 
-  Widget renderUpdateProfileScreen() => UserUpdateScreen();
+  Widget renderUpdateProfileScreen() => UpdateInfoScreen();
 
   Widget renderProductDetailCategories(BuildContext context, Product? product) {
     return ExpansionInfo(

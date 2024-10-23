@@ -19,23 +19,28 @@ import '../../common/config.dart';
 import '../../common/constants.dart';
 import '../../common/tools.dart' hide ImagePicker;
 import '../../generated/l10n.dart';
+import '../../models/cart/cart_base.dart';
 import '../../screens/common/app_bar_mixin.dart';
 import '../html/index.dart';
 import 'webview_inapp.dart';
 
 mixin WebviewMixin {
+  late CartModel model;
   Future<bool> overrideWebNavigation(String url,{BuildContext? cont}) async {
     /// open the normal web link
-
     final allowedUrls = [
       'https://negade.biz/checkout/',
       'https://negade.biz/checkout/order-detail',
       'https://negade.biz/privacy-policy/',
       'https://negade.biz/about-us/',
-      'https://checkout.arifpay.net'
+      'https://checkout.arifpay.net',
+      'https://negade.biz/my-account/lost-password/'
     ];
     if (allowedUrls.any((allowedUrl) => url.startsWith(allowedUrl))) {
       return false; // Allow navigation
+    }
+    if(url=='https://negade.biz/checkout/order-detail'){
+      model.clearCart();
     }
     if(cont!=null){
       WidgetsBinding.instance.addPostFrameCallback((_) {
