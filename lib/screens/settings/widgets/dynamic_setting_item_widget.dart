@@ -13,7 +13,9 @@ import '../../../routes/flux_navigate.dart';
 import '../../../services/service_config.dart';
 import '../../../widgets/general/index.dart';
 import '../../users/user_point_screen.dart';
+import '../bulk_order_form.dart';
 import '../layouts/mixins/setting_action_mixin.dart';
+import '../purchase_list.dart';
 import '../rate_myapp_mixin.dart';
 import 'setting_item/setting_item_notification_widget.dart';
 import 'setting_item/setting_item_widget.dart';
@@ -41,6 +43,13 @@ class DynamicSettingItemWidget extends StatefulWidget {
 class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
     with RateMyAppMixin, SettingActionMixin {
   SettingItemStyle? get _cardStyle => widget.cardStyle;
+
+  void _navigateToBulkOrderForm(BuildContext context) {
+    Navigator.push(
+      context,
+      CupertinoPageRoute(builder: (context) => BulkOrderForm()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,52 +119,52 @@ class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
 
       case 'chat':
         return const SizedBox();
-        // {
-        //   if (widget.user == null ||
-        //       ServerConfig().isListingType ||
-        //       !isMultiVendor) {
-        //     return const SizedBox();
-        //   }
-        //   title = S.of(context).conversations;
-        //   icon = CupertinoIcons.chat_bubble_2;
-        //   onTap = () {
-        //     Navigator.pushNamed(
-        //       context,
-        //       RouteList.listChat,
-        //       arguments: isMultiVendor && widget.user?.isVender == true,
-        //     );
-        //   };
-        //   break;
-        // }
+      // {
+      //   if (widget.user == null ||
+      //       ServerConfig().isListingType ||
+      //       !isMultiVendor) {
+      //     return const SizedBox();
+      //   }
+      //   title = S.of(context).conversations;
+      //   icon = CupertinoIcons.chat_bubble_2;
+      //   onTap = () {
+      //     Navigator.pushNamed(
+      //       context,
+      //       RouteList.listChat,
+      //       arguments: isMultiVendor && widget.user?.isVender == true,
+      //     );
+      //   };
+      //   break;
+      // }
       case 'wallet':
         return const SizedBox();
-        // {
-        //   var walletDisabled = Provider.of<AppModel>(context, listen: false)
-        //           .multiSiteConfig
-        //           ?.walletEnabled ==
-        //       false;
-        //   if (widget.user == null ||
-        //       !ServerConfig().isWooType ||
-        //       walletDisabled) {
-        //     return const SizedBox();
-        //   }
-        //   title = S.of(context).myWallet;
-        //   icon = CupertinoIcons.square_favorites_alt;
-        //   onTap = () async {
-        //     if (BiometricsTools.instance.isWalletSupported) {
-        //       var didAuth = await BiometricsTools.instance.localAuth(context);
-        //       if (!didAuth) {
-        //         return;
-        //       }
-        //     }
-        //
-        //     await FluxNavigate.pushNamed(
-        //       RouteList.myWallet,
-        //       forceRootNavigator: true,
-        //     );
-        //   };
-        //   break;
-        // }
+      // {
+      //   var walletDisabled = Provider.of<AppModel>(context, listen: false)
+      //           .multiSiteConfig
+      //           ?.walletEnabled ==
+      //       false;
+      //   if (widget.user == null ||
+      //       !ServerConfig().isWooType ||
+      //       walletDisabled) {
+      //     return const SizedBox();
+      //   }
+      //   title = S.of(context).myWallet;
+      //   icon = CupertinoIcons.square_favorites_alt;
+      //   onTap = () async {
+      //     if (BiometricsTools.instance.isWalletSupported) {
+      //       var didAuth = await BiometricsTools.instance.localAuth(context);
+      //       if (!didAuth) {
+      //         return;
+      //       }
+      //     }
+      //
+      //     await FluxNavigate.pushNamed(
+      //       RouteList.myWallet,
+      //       forceRootNavigator: true,
+      //     );
+      //   };
+      //   break;
+      // }
       case 'wishlist':
         {
           // Check if the user is logged in
@@ -169,7 +178,8 @@ class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
                       return Text(
                         '${model.products.length} ${S.of(context).items}',
                         style: TextStyle(
-                            fontSize: 14, color: Theme.of(context).primaryColor),
+                            fontSize: 14,
+                            color: Theme.of(context).primaryColor),
                       );
                     } else {
                       return const SizedBox();
@@ -196,79 +206,79 @@ class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
         }
       case 'language':
         return const SizedBox();
-        // {
-        //   return Selector<AppModel, String?>(
-        //     selector: (context, model) => model.langCode,
-        //     builder: (context, langCode, _) {
-        //       final languages = getLanguages();
-        //       return SettingItemWidget(
-        //         cardStyle: _cardStyle,
-        //         icon: CupertinoIcons.globe,
-        //         title: S.of(context).language,
-        //         trailing: Row(
-        //           mainAxisSize: MainAxisSize.min,
-        //           children: [
-        //             Text(
-        //               languages.firstWhere(
-        //                 (element) => langCode == element['code'],
-        //                 orElse: () => {'text': ''},
-        //               )['text'],
-        //               style: TextStyle(
-        //                 color: Theme.of(context).colorScheme.secondary,
-        //               ),
-        //             ),
-        //             const SizedBox(width: 16.0),
-        //             const Icon(
-        //               Icons.arrow_forward_ios,
-        //               size: 18,
-        //               color: kGrey600,
-        //             )
-        //           ],
-        //         ),
-        //         onTap: () {
-        //           Navigator.of(context).pushNamed(RouteList.language);
-        //         },
-        //       );
-        //     },
-        //   );
-        // }
+      // {
+      //   return Selector<AppModel, String?>(
+      //     selector: (context, model) => model.langCode,
+      //     builder: (context, langCode, _) {
+      //       final languages = getLanguages();
+      //       return SettingItemWidget(
+      //         cardStyle: _cardStyle,
+      //         icon: CupertinoIcons.globe,
+      //         title: S.of(context).language,
+      //         trailing: Row(
+      //           mainAxisSize: MainAxisSize.min,
+      //           children: [
+      //             Text(
+      //               languages.firstWhere(
+      //                 (element) => langCode == element['code'],
+      //                 orElse: () => {'text': ''},
+      //               )['text'],
+      //               style: TextStyle(
+      //                 color: Theme.of(context).colorScheme.secondary,
+      //               ),
+      //             ),
+      //             const SizedBox(width: 16.0),
+      //             const Icon(
+      //               Icons.arrow_forward_ios,
+      //               size: 18,
+      //               color: kGrey600,
+      //             )
+      //           ],
+      //         ),
+      //         onTap: () {
+      //           Navigator.of(context).pushNamed(RouteList.language);
+      //         },
+      //       );
+      //     },
+      //   );
+      // }
       case 'currencies':
         return const SizedBox();
-        // {
-        //   if (ServerConfig().isListingType) {
-        //     return const SizedBox();
-        //   }
-        //   return Selector<AppModel, String?>(
-        //     selector: (context, model) => model.currency,
-        //     builder: (context, currency, _) {
-        //       return SettingItemWidget(
-        //         cardStyle: _cardStyle,
-        //         icon: CupertinoIcons.money_dollar_circle,
-        //         title: S.of(context).currencies,
-        //         trailing: Row(
-        //           mainAxisSize: MainAxisSize.min,
-        //           children: [
-        //             Text(
-        //               '$currency',
-        //               style: TextStyle(
-        //                 color: Theme.of(context).colorScheme.secondary,
-        //               ),
-        //             ),
-        //             const SizedBox(width: 16.0),
-        //             const Icon(
-        //               Icons.arrow_forward_ios,
-        //               size: 18,
-        //               color: kGrey600,
-        //             )
-        //           ],
-        //         ),
-        //         onTap: () {
-        //           Navigator.of(context).pushNamed(RouteList.currencies);
-        //         },
-        //       );
-        //     },
-        //   );
-        // }
+      // {
+      //   if (ServerConfig().isListingType) {
+      //     return const SizedBox();
+      //   }
+      //   return Selector<AppModel, String?>(
+      //     selector: (context, model) => model.currency,
+      //     builder: (context, currency, _) {
+      //       return SettingItemWidget(
+      //         cardStyle: _cardStyle,
+      //         icon: CupertinoIcons.money_dollar_circle,
+      //         title: S.of(context).currencies,
+      //         trailing: Row(
+      //           mainAxisSize: MainAxisSize.min,
+      //           children: [
+      //             Text(
+      //               '$currency',
+      //               style: TextStyle(
+      //                 color: Theme.of(context).colorScheme.secondary,
+      //               ),
+      //             ),
+      //             const SizedBox(width: 16.0),
+      //             const Icon(
+      //               Icons.arrow_forward_ios,
+      //               size: 18,
+      //               color: kGrey600,
+      //             )
+      //           ],
+      //         ),
+      //         onTap: () {
+      //           Navigator.of(context).pushNamed(RouteList.currencies);
+      //         },
+      //       );
+      //     },
+      //   );
+      // }
       case 'darkTheme':
         {
           return Selector<AppModel, bool>(
@@ -323,14 +333,41 @@ class _DynamicSettingItemWidgetState extends State<DynamicSettingItemWidget>
               );
           break;
         }
-      case 'rating':
-        return const SizedBox();
-        // {
-        //   icon = CupertinoIcons.star;
-        //   title = S.of(context).rateTheApp;
-        //   onTap = showRateMyApp;
-        //   break;
-        // }
+      case 'Bulk Order':
+        {
+          if (UserBox().isLoggedIn) {
+          icon = CupertinoIcons.cart;
+          title = 'Bulk Order';
+          onTap = () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BulkOrderForm(),
+            ),
+          );
+          }
+          else{
+            return SizedBox();
+          }
+          break;
+        }
+      case 'Purchase List':
+        {
+          if (UserBox().isLoggedIn) {
+            icon = CupertinoIcons.square_list;
+            title = 'Purchase List';
+            onTap = () =>
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PurchaseListPage(),
+                  ),
+                );
+          }
+          else{
+            return SizedBox();
+          }
+          break;
+        }
       case 'privacy':
         {
           icon = CupertinoIcons.doc_text;

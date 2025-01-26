@@ -174,6 +174,8 @@ Map<String, dynamic> environment = {
     "wallet",
     "chat",
     "wishlist",
+    "Bulk Order",
+    "Purchase List",
     "notifications",
     "language",
     "currencies",
@@ -182,7 +184,7 @@ Map<String, dynamic> environment = {
     "point",
     "rating",
     "privacy",
-    "about"
+    "about",
   ],
   "loginSetting": {
     "facebookAppId": "430258564493822",
